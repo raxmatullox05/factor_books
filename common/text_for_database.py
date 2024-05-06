@@ -9,5 +9,4 @@ categories = ["⚡IKAR",
               "Badiiy romanlar",
               "Qissa va romanlar",
               "Badiiy kitoblar va qissalar",
-              "🔍 Qidirish"
               ]

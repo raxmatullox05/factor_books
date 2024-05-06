@@ -1,11 +1,12 @@
 from aiogram import Router, Bot
+from aiogram.enums import ChatType
 from aiogram.filters import Command, command
 from aiogram.types import Message
 
 from filters.chat_types import ChatTypeFilter
 
 user_group_router = Router()
-user_group_router.message.filter(ChatTypeFilter(['group', 'supergroup']))
+user_group_router.message.filter(ChatTypeFilter([ChatType.GROUP, ChatType.SUPERGROUP]))
 
 
 @user_group_router.message(Command(commands='admin'))

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-06 12:23+0500\n"
-"PO-Revision-Date: 2024-05-06 12:23+0500\n"
+"POT-Creation-Date: 2024-05-06 19:11+0500\n"
+"PO-Revision-Date: 2024-05-06 18:24+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,11 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.13.1\n"
 
-#: handlers/user_private.py:21
+#: handlers/user_private.py:23
 msgid "Hello {name}! Choose."
 msgstr "Assalomu alaykum {name}! Tanlang."
 
-#: handlers/user_private.py:23
+#: handlers/user_private.py:25
 msgid "📚 Books"
 msgstr "📚 Kitoblar"
+
+#: handlers/user_private.py:26
+msgid "📃 My orders"
+msgstr "📃 Mening buyurtmalarim"
+
+#: handlers/user_private.py:27
+msgid "🔵 We are in social media"
+msgstr "🔵 Biz ijtimoiy tarmoqlarda"
+
+#: handlers/user_private.py:28
+msgid "📞 Contact us"
+msgstr "📞 Biz bilan bog'lanish"
+
+#: handlers/user_private.py:29
+msgid "🌐 Change language"
+msgstr "🌐 Tilni o'zgartirish"
+
+#: handlers/user_private.py:48
+msgid "Choose language"
+msgstr "Tilni tanlang"
+
+#: handlers/user_private.py:58
+msgid "Language chosen"
+msgstr "Til tanlandi"
 

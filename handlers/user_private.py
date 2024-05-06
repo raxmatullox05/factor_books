@@ -1,6 +1,7 @@
 from aiogram import Router, html, F
 from aiogram.enums import ChatType
 from aiogram.filters import CommandStart
+from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery, InputMediaPhoto, message
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -10,7 +11,8 @@ from filters.chat_types import ChatTypeFilter
 from keyboards.inline_keyboards import get_inline_keyboard
 from keyboards.reply_keyboards import get_reply_keyboard
 
-from aiogram.utils.i18n import gettext as _
+# from aiogram.utils.i18n import gettext as _
+# from aiogram.utils.i18n import lazy_gettext as __
 
 user_private_router = Router()
 user_private_router.message.filter(ChatTypeFilter([ChatType.PRIVATE]))
@@ -18,12 +20,12 @@ user_private_router.message.filter(ChatTypeFilter([ChatType.PRIVATE]))
 
 @user_private_router.message(CommandStart())
 async def start(message: Message):
-    await message.answer(text=_('Hello {name}! Choose.').format(name=message.from_user.full_name),
+    await message.answer(text=f'Hello {message.from_user.full_name}! Choose.',
                          reply_markup=get_reply_keyboard(
-                             _("📚 Books",
-                               "📃 My orders",
-                               "🔵 We are in social media",
-                               "📞 Contact us"),
+                             "📚 Kitoblar",
+                             "📃 Mening buyurtmalarim",
+                             "🔵 Biz ijtimoiy tarmoqlarda",
+                             "📞 Biz bilan bog'lanish",
                              sizes=(1, 1, 2)
                          ))
 
@@ -32,11 +34,27 @@ async def start(message: Message):
 async def kitoblar(message: Message, session: AsyncSession):
     categories = await orm_get_categories(session)
     btns = {category.name: f"category_{category.id}" for category in categories}
+    btns['🔍 Qidirish'] = "switch_inline_query_current_chat"
     cart = await orm_get_user_cart(session, message.from_user.id)
     if cart:
         btns[f'🛒 Savat({cart[0].quantity})'] = f"savat_{message.from_user.id}"
     await message.answer("Qaysi categoriyalarni product larini ko'rmoxchisiz: ",
                          reply_markup=get_inline_keyboard(btns=btns))
+
+
+# @user_private_router.message(F.text == '🌐 Change language')
+# async def change_language(message: Message):
+#     await message.answer('Choose language', reply_markup=get_inline_keyboard(btns={
+#         "uz": "lang_uz",
+#         "en": "lang_en"
+#     }, sizes=(1,)))
+
+
+# @user_private_router.callback_query(F.data.startswith('lang'))
+# async def start_handler(callback: CallbackQuery, state: FSMContext):
+#     lang_code = callback.data.split('_')[-1]
+#     await state.set_data({'locales': lang_code})
+#     await callback.answer(_('Language chosen', locale=lang_code))
 
 
 @user_private_router.callback_query(F.data == 'back')
@@ -134,7 +152,7 @@ async def add_to_cart(callback: CallbackQuery, session: AsyncSession):
     btns = {category.name: f"category_{category.id}" for category in categories}
     cart = await orm_get_user_cart(session, callback.from_user.id)
     if cart:
-        btns[f'🛒 Savat({cart[0].quantity})'] = f"savat_{callback.from_user.id}"
+        btns[f'🛒 Savat({len(cart)})'] = f"savat_{callback.from_user.id}"
     await callback.message.answer("Qaysi categoriyalarni product larini ko'rmoxchisiz: ",
                                   reply_markup=get_inline_keyboard(btns=btns))
 

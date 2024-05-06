@@ -1,5 +1,7 @@
 from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.utils.i18n import gettext as _
+
 
 
 def get_inline_keyboard(
@@ -11,9 +13,10 @@ def get_inline_keyboard(
     for text, value in btns.items():
         if '://' in value:
             keyboard.add(InlineKeyboardButton(text=text, url=value))
+        elif value == "switch_inline_query_current_chat":
+            keyboard.add(InlineKeyboardButton(text=text, switch_inline_query_current_chat=' '))
         else:
             keyboard.add(InlineKeyboardButton(text=text, callback_data=value))
-    keyboard.add(InlineKeyboardButton(text="Qidirish", switch_inline_query_current_chat=' '))
     return keyboard.adjust(*sizes).as_markup()
 
 

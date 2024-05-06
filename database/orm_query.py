@@ -1,9 +1,12 @@
+from typing import Any
+
 from sqlalchemy import select, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database.models import Product, Category, User, Cart, Queue
+from database.models import Product, Category, User, Cart, Order
 
 
+#################################### Products #########################################
 async def orm_add_product(session: AsyncSession, data):
     obj = Product(
         nomi=data['nomi'],
@@ -27,16 +30,15 @@ async def orm_get_product(session: AsyncSession, product_id: int):
     return result.scalar()
 
 
-async def orm_get_products(session: AsyncSession, category_id: int):
-    query = select(Product).where(Product.category_id == category_id)
-    result = await session.execute(query)
-    return result.scalars().all()
-
-
-async def orm_get_all_products(session: AsyncSession):
-    query = select(Product)
-    result = await session.execute(query)
-    return result.scalars().all()
+async def orm_get_products(session: AsyncSession, category_id: int = None):
+    if category_id:
+        query = select(Product).where(Product.category_id == category_id)
+        result = await session.execute(query)
+        return result.scalars().all()
+    else:
+        query = select(Product)
+        result = await session.execute(query)
+        return result.scalars().all()
 
 
 async def orm_get_all_products_by_startswith(session: AsyncSession, startswith: str):
@@ -45,8 +47,10 @@ async def orm_get_all_products_by_startswith(session: AsyncSession, startswith: 
     return result.scalars().all()
 
 
-async def orm_update_product(session: AsyncSession, product_id: int, data):
-    pass
+async def orm_update_product(session: AsyncSession, product_id: int, **data: dict[str, str]):
+    query = update(Product).where(Product.id == product_id).values(data)
+    await session.execute(query)
+    await session.commit()
 
 
 async def orm_delete_product(session: AsyncSession, product_id: int):
@@ -94,8 +98,8 @@ async def orm_add_user(session: AsyncSession,
         await session.commit()
 
 
-async def orm_update_user(session: AsyncSession, user_id: int, data, value) -> object:
-    pass
+async def orm_update_user(session: AsyncSession, user_id: int, **data: dict[str, str]):
+    query = update(User).where(User.user_id == user_id).values(data)
 
 
 ######################################### Basket ###################################
@@ -130,4 +134,10 @@ async def orm_clear_cart(session: AsyncSession, user_id: int):
 ######################################### Queue ######################################
 
 async def orm_get_queue(session: AsyncSession, user_id: int):
-    pass
+    query = select(Order).where(Order.user_id == user_id)
+    result = await session.execute(query)
+    if result.first():
+        return result
+    else:
+        session.add(Order(user_id=user_id))
+        await session.commit()

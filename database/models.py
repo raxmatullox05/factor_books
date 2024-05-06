@@ -53,10 +53,10 @@ class Cart(Base):
     product: Mapped['Product'] = relationship(backref='carts')
 
 
-class Queue(Base):
-    __tablename__ = 'queues'
+class Order(Base):
+    __tablename__ = 'orders'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id', ondelete='CASCADE'), nullable=False)
 
-    user: Mapped['User'] = relationship(backref='queue')
+    user: Mapped['User'] = relationship(backref='orders')

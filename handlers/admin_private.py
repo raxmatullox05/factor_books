@@ -1,5 +1,8 @@
+import requests
+
 from aiogram import Router, F
-from aiogram.filters import CommandStart, Command, StateFilter
+from aiogram.enums import ChatType
+from aiogram.filters import CommandStart, Command, StateFilter, or_f
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery
@@ -12,7 +15,7 @@ from keyboards.inline_keyboards import get_inline_keyboard
 from keyboards.reply_keyboards import get_reply_keyboard
 
 admin_private_router = Router()
-admin_private_router.message.filter(ChatTypeFilter(['private']), IsAdmin())
+admin_private_router.message.filter(ChatTypeFilter([ChatType.PRIVATE]), IsAdmin())
 
 ADMIN_KB = get_reply_keyboard(
     "Add a product",
@@ -55,8 +58,7 @@ async def add_product(message: Message, state: FSMContext):
     await state.set_state(AddProduct.nomi)
 
 
-@admin_private_router.message(StateFilter('*'), Command(commands='cancel'))
-@admin_private_router.message(StateFilter('*'), F.text.casefold() == 'cancel')
+@admin_private_router.message(StateFilter('*'), or_f(F.text.casefold() == 'cancel', Command(commands='cancel')))
 async def cancel(message: Message, state: FSMContext):
     current_state = state.get_state()
     if current_state is None:
@@ -65,8 +67,7 @@ async def cancel(message: Message, state: FSMContext):
     await message.answer('Rad qilindi!')
 
 
-@admin_private_router.message(StateFilter('*'), Command(commands='step over'))
-@admin_private_router.message(StateFilter('*'), F.text.casefold() == 'step over')
+@admin_private_router.message(StateFilter('*'), or_f(F.text.casefold() == 'step over', Command(commands='step over')))
 async def step_over(message: Message, state: FSMContext):
     current_state = state.get_state()
     if current_state == AddProduct.nomi:
@@ -168,7 +169,12 @@ async def add_product_category(callback: CallbackQuery, state: FSMContext, sessi
 
 @admin_private_router.message(AddProduct.rasm, F.photo)
 async def add_product_rasm(message: Message, state: FSMContext):
-    await state.update_data(rasm=message.photo[-1].file_id)
+    response = requests.post('https://telegra.ph/upload', files={'file': message.photo[-1].file_id})
+    print(response.status_code)
+    data = response.json()
+    url = "https://telegra.ph" + data[0].get('src').replace(r"\\", '')
+    print(url)
+    await state.update_data(rasm=url)
     await state.set_state(AddProduct.narxi)
     await message.answer("Product narxi kiriting: ")
 
