@@ -1,0 +1,15 @@
+1. What is the difference between: first() and scalar()
+
+2. (add_to_cart) await orm_get_user_cart(session, callback.from_user.id) -> How can i get "quantity" inside of "result"
+
+3. Product update
+
+4. User update
+
+
+
+
+
+task
+1. rasm -> https://telegra.ph/ -> url
+1. rasm -> https://telegra.ph/ -> rasm(path), url
