@@ -1,6 +1,5 @@
 from aiogram.types import KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
-from aiogram.utils.i18n import gettext as _
 
 
 def get_reply_keyboard(

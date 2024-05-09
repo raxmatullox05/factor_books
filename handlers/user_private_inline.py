@@ -15,12 +15,12 @@ async def user_inline_handler(inline_query: InlineQuery, session: AsyncSession) 
         for product in products[:50]:
             inline_list.append(InlineQueryResultArticle(
                 id=str(product.id),
-                title=product.nomi,
+                title=product.name,
                 input_message_content=InputTextMessageContent(
-                    message_text=str(product.id)
+                    message_text=f"inline_query_{str(product.id)}"
                 ),
-                thumbnail_url="https://telegra.ph/file/8006558d9ff33ced877d2.png",
-                description=str(product.narxi)
+                thumbnail_url=product.photo,
+                description=f"💵 {str(product.price)} so'm"
             ))
 
         await inline_query.answer(inline_list)
@@ -30,12 +30,12 @@ async def user_inline_handler(inline_query: InlineQuery, session: AsyncSession) 
         for product in products[:50]:
             inline_list.append(InlineQueryResultArticle(
                 id=str(product.id),
-                title=product.nomi,
+                title=product.name,
                 input_message_content=InputTextMessageContent(
                     message_text=str(product.id)
                 ),
-                thumbnail_url="https://telegra.ph/file/8006558d9ff33ced877d2.png",
-                description=str(product.narxi)
+                thumbnail_url=product.photo,
+                description=f"💵 {str(product.price)} so'm"
             ))
 
         await inline_query.answer(inline_list)

@@ -6,6 +6,9 @@ user_commands = (
 )
 
 admin_commands = (
-    BotCommand(command='add_category', description='Add category'),
-    BotCommand(command='add_product', description='Add product'),
+    BotCommand(command='start', description='Start the bot'),
+    BotCommand(command='add a product', description='Add a new product'),
+    BotCommand(command='show all products', description='Show all products'),
+    BotCommand(command='cancel', description='To cancel the process of adding a new product'),
+    BotCommand(command='step over', description='Make one step over')
 )

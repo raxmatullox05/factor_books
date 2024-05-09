@@ -1,4 +1,4 @@
-from sqlalchemy import Float, Text, String, DateTime, func, Column, ForeignKey, Numeric, Integer
+from sqlalchemy import String, DateTime, func, ForeignKey, Numeric
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -18,14 +18,14 @@ class Product(Base):
     __tablename__ = 'products'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    nomi: Mapped[str] = mapped_column(String(255), nullable=False)
-    muallifi: Mapped[str] = mapped_column(String(255), nullable=False)
-    janri: Mapped[str] = mapped_column(String(255), nullable=False)
-    tarjimon: Mapped[str] = mapped_column(String(255), nullable=False)
-    bet: Mapped[int] = mapped_column(nullable=False)
-    muqova: Mapped[str] = mapped_column(String(255), nullable=False)
-    rasmi: Mapped[str] = mapped_column(String(255), nullable=False)
-    narxi: Mapped[float] = mapped_column(Numeric(6, 3), nullable=False)
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    author: Mapped[str] = mapped_column(String(255), nullable=False)
+    genre: Mapped[str] = mapped_column(String(255), nullable=False)
+    translator: Mapped[str] = mapped_column(String(255), nullable=False)
+    page: Mapped[int] = mapped_column(nullable=False)
+    cover: Mapped[str] = mapped_column(String(255), nullable=False)
+    photo: Mapped[str] = mapped_column(String(255), nullable=False)
+    price: Mapped[float] = mapped_column(Numeric(6, 3), nullable=False)
     category_id: Mapped[int] = mapped_column(ForeignKey('categories.id', ondelete='CASCADE'), nullable=False)
 
     category: Mapped["Category"] = relationship(backref='products')
@@ -57,6 +57,4 @@ class Order(Base):
     __tablename__ = 'orders'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id', ondelete='CASCADE'), nullable=False)
-
-    user: Mapped['User'] = relationship(backref='orders')
+    user_id: Mapped[int] = mapped_column(nullable=False)

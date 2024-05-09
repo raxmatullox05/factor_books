@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-06 19:11+0500\n"
-"PO-Revision-Date: 2024-05-06 18:24+0500\n"
+"POT-Creation-Date: 2024-05-09 19:22+0500\n"
+"PO-Revision-Date: 2024-05-08 22:11+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uz\n"
 "Language-Team: uz <LL@li.org>\n"
@@ -18,59 +18,191 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.13.1\n"
 
-#: handlers/user_private.py:23
-msgid "Hello {name}! Choose."
-msgstr "Assalomu alaykum {name}! Tanlang."
+#: handlers/user_private.py:22
+msgid "Assalomu alaykum {name}! Tanlang."
+msgstr ""
 
-#: handlers/user_private.py:25
-msgid "📚 Books"
-msgstr "📚 Kitoblar"
+#: handlers/user_private.py:24 handlers/user_private.py:237
+#: handlers/user_private.py:248
+msgid "📚 Kitoblar"
+msgstr ""
 
-#: handlers/user_private.py:26
-msgid "📃 My orders"
-msgstr "📃 Mening buyurtmalarim"
+#: handlers/user_private.py:25 handlers/user_private.py:238
+#: handlers/user_private.py:249
+msgid "📃 Mening buyurtmalarim"
+msgstr ""
 
-#: handlers/user_private.py:27
-msgid "🔵 We are in social media"
-msgstr "🔵 Biz ijtimoiy tarmoqlarda"
+#: handlers/user_private.py:26 handlers/user_private.py:239
+#: handlers/user_private.py:250
+msgid "🔵 Biz ijtimoiy tarmoqlarda"
+msgstr ""
+
+#: handlers/user_private.py:27 handlers/user_private.py:240
+#: handlers/user_private.py:251
+msgid "📞 Biz bilan bog'lanish"
+msgstr ""
 
 #: handlers/user_private.py:28
-msgid "📞 Contact us"
-msgstr "📞 Biz bilan bog'lanish"
+msgid "🌐 Tilni tanlash"
+msgstr ""
 
-#: handlers/user_private.py:29
-msgid "🌐 Change language"
-msgstr "🌐 Tilni o'zgartirish"
+#: handlers/user_private.py:37 handlers/user_private.py:67
+#: handlers/user_private.py:160
+msgid "🔍 Qidirish"
+msgstr ""
 
-#: handlers/user_private.py:48
-msgid "Choose language"
-msgstr "Tilni tanlash"
+#: handlers/user_private.py:40 handlers/user_private.py:70
+#: handlers/user_private.py:163
+msgid "🛒 Savat({len})"
+msgstr ""
 
-#: handlers/user_private.py:58
-msgid "Language chosen"
-msgstr "Til tanlandi"
+#: handlers/user_private.py:41 handlers/user_private.py:164
+msgid "Qaysi categoriyalarni product larini ko'rmoxchisiz: "
+msgstr ""
 
-#~ msgid "Assalomu alaykum {name}! Tanlang."
-#~ msgstr "Hello {name}! Choose"
+#: handlers/user_private.py:47
+msgid "Tanlang: "
+msgstr ""
 
-#~ msgid "📚 Kitoblar"
-#~ msgstr "📚 Books"
+#: handlers/user_private.py:56
+msgid "Uzbek tili tanlandi!"
+msgstr ""
 
-#~ msgid "Mening buyurtmalarim"
-#~ msgstr "📃 My orders"
+#: handlers/user_private.py:59
+msgid "Ingiliz tili tanlandi!"
+msgstr ""
 
-#~ msgid "🔵 Biz ijtimoiy tarmoqlarda"
-#~ msgstr "🔵 We are in social media"
+#: handlers/user_private.py:88 handlers/user_private.py:186
+#: handlers/user_private.py:222
+msgid "⬅ Orqaga"
+msgstr ""
 
-#~ msgid "📞 Biz bilan bog'lanish"
-#~ msgstr "📞 Contact us"
+#: handlers/user_private.py:101
+msgid "🛒 Savatga qo'shish"
+msgstr ""
 
-#~ msgid "🌐 Tilni o'zgartirish"
-#~ msgstr "🌐 Change language"
+#: handlers/user_private.py:112 handlers/user_private.py:129
+#: handlers/user_private.py:269
+msgid ""
+"🔷 Nomi: {name}\n"
+"Muallifi: {author}\n"
+"Janri: {genre}\n"
+"Tarjimon: {translator}\n"
+"Bet: {page}\n"
+"Muqova: {cover}\n"
+"💸 Narxi: {price} so'm"
+msgstr ""
 
-#~ msgid "Tilni tanlang"
-#~ msgstr "Choose language"
+#: handlers/user_private.py:156
+msgid "Product qo'shildi"
+msgstr ""
 
-#~ msgid "Til tanlandi"
-#~ msgstr "Language chosen"
+#: handlers/user_private.py:173 handlers/user_private.py:208
+msgid ""
+"🛒 Savat\n"
+"\n"
+msgstr ""
+
+#: handlers/user_private.py:181
+msgid "Jami: {summa} so'm"
+msgstr ""
+
+#: handlers/user_private.py:184
+msgid "❌ Savatni tozalash"
+msgstr ""
+
+#: handlers/user_private.py:185
+msgid "✅ Buyurtmani tasdiqlash"
+msgstr ""
+
+#: handlers/user_private.py:199
+msgid "📞 Telefon raqam tugmasini bosing 🔽:"
+msgstr ""
+
+#: handlers/user_private.py:200
+msgid "📞 Telefon raqam"
+msgstr ""
+
+#: handlers/user_private.py:216
+msgid ""
+"Jami: {summa} so'm\n"
+"Telfon raqamingiz: {phone_number}\n"
+"\n"
+"Buyurtma berasizmi?"
+msgstr ""
+
+#: handlers/user_private.py:220
+msgid "❌ Yo'q"
+msgstr ""
+
+#: handlers/user_private.py:221
+msgid "✅ Ha"
+msgstr ""
+
+#: handlers/user_private.py:231
+msgid "✅ Hurmatli mijoz! Buyurtmangiz uchun tashakkur."
+msgstr ""
+
+#: handlers/user_private.py:234
+msgid "Buyurtma raqami: {order_number}"
+msgstr ""
+
+#: handlers/user_private.py:236 handlers/user_private.py:247
+msgid "Asosiy menu"
+msgstr ""
+
+#: handlers/user_private.py:246
+msgid "❌ Bekor qilindi"
+msgstr ""
+
+#: handlers/user_private.py:259
+msgid ""
+"Telegram: @RRF_0406\n"
+"\n"
+"📞 +998977090406\n"
+"\n"
+"Bizning guruximiz: t.me/rrf_factor_books_group"
+msgstr ""
+
+#: handlers/user_private.py:285
+msgid "✅ qabul qilingan"
+msgstr ""
+
+#: handlers/user_private.py:285
+msgid "❌ qabul qilinmagan"
+msgstr ""
+
+#: handlers/user_private.py:286
+msgid ""
+"🔢 Buyurtma raqami: {order_number}\n"
+"📆 Buyurtma qilingan sana: {date}\n"
+"🟣 Buyurtma holati: {state}\n"
+"\n"
+"{i}. 📕 Kitob nomi: {book_name}\n"
+"{quantity} x {price} = {summa}\n"
+"\n"
+" 💵 Umumiy narxi: {summa_all} so'm"
+msgstr ""
+
+#~ msgid "Product muallifini kiriting: "
+#~ msgstr ""
+
+#~ msgid "English language has been chosen!"
+#~ msgstr ""
+
+#~ msgid "Qaysi categoriyalarni product larini ko'rmoxchisiz: )"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "🔢 Buyurtma raqami: {order_number}\n"
+#~ "📆 Buyurtma qilingan sana: {date}\n"
+#~ "🟣 Buyurtma holati: {state}\n"
+#~ "\n"
+#~ "{i}. \n"
+#~ "        📕 Kitob nomi: {book_name}\n"
+#~ "{quantity} x {price} = {summa}\n"
+#~ "\n"
+#~ " 💵 Umumiy narxi: {summa_all} so'm\n"
+#~ "        "
+#~ msgstr ""
 
