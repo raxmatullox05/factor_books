@@ -1,10 +1,10 @@
 FROM python:3-alpine
 
-ENV BOT_TOKEN=''
+ENV TOKEN=''
 
 WORKDIR /app
 
 COPY . /app
-RUN pip install -r requirements.txt
+RUN --mount=type=cache,id=custom-pip,target=/root/.cache/pip pip install -r requirements.txt
 
 CMD ["python3", "app.py"]
