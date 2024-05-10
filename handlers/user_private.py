@@ -45,18 +45,27 @@ async def books_fun(message: Message, session: AsyncSession):
 @user_private_router.message(F.text == __("🌐 Tilni tanlash"))
 async def choose_language_fun(message: Message):
     await message.answer(_('Tanlang: '),
-                         reply_markup=get_reply_keyboard("Uz 🇺🇿", "En 🇬🇧"))
+                         reply_markup=get_inline_keyboard(btns={
+                             "Uz 🇺🇿": 'lang_uz',
+                             "En 🇬🇧": 'lang_en'
+                         }))
 
 
-@user_private_router.message(F.text.in_(["Uz 🇺🇿", "En 🇬🇧"]))
-async def choose_one_language(message: Message, state: FSMContext, bot: Bot):
-    if message.text == 'Uz 🇺🇿':
-        await state.update_data(locale="uz")
-        await bot.delete_message(message.chat.id, message.message_id)
-        await message.answer(_("Uzbek tili tanlandi!"))
-    else:
-        await state.update_data(locale="en")
-        await message.answer(_("Ingiliz tili tanlandi!"))
+@user_private_router.callback_query(F.data.startswith('lang'))
+async def choose_one_language(callback: CallbackQuery, state: FSMContext, bot: Bot):
+    language_code = callback.data.split('_')[-1]
+    language = (_("Uzbek", locale='uz'), _("Ingliz", locale='en'))[language_code == 'en']
+    await state.update_data(locale=language_code)
+    await callback.answer(_("{language} tili tanlandi!", locale=language_code).format(language=language))
+    await callback.message.answer(text=_('Tanlang.'),
+                                  reply_markup=get_reply_keyboard(
+                                      _("📚 Kitoblar", locale=language_code),
+                                      _("📃 Mening buyurtmalarim", locale=language_code),
+                                      _("🔵 Biz ijtimoiy tarmoqlarda", locale=language_code),
+                                      _("📞 Biz bilan bog'lanish", locale=language_code),
+                                      _("🌐 Tilni tanlash", locale=language_code),
+                                      sizes=(1, 1, 2)
+                                  ))
 
 
 @user_private_router.callback_query(F.data == 'back')
@@ -273,6 +282,7 @@ async def inline_query_response(message: Message, session: AsyncSession):
                                reply_markup=await make_plus_minus(product_id, session))
     await message.delete()
 
+
 @user_private_router.message(F.text == __("📃 Mening buyurtmalarim"))
 async def mening_buyurtmalarim(message: Message, session: AsyncSession):
     user_id = message.from_user.id
@@ -282,7 +292,8 @@ async def mening_buyurtmalarim(message: Message, session: AsyncSession):
         for i, cart in enumerate(products_in_cart):
             product = await orm_get_product(session, cart.product_id)
             for order in await orm_get_orders(session, user_id):
-                text = _("""🔢 Buyurtma raqami: {order_number}\n📆 Buyurtma qilingan sana: {date}\n\n{i}. 📕 Kitob nomi: {book_name}\n{quantity} x {price} = {summa}\n\n 💵 Umumiy narxi: {summa_all} so'm""").format(
+                text = _(
+                    """🔢 Buyurtma raqami: {order_number}\n📆 Buyurtma qilingan sana: {date}\n\n{i}. 📕 Kitob nomi: {book_name}\n{quantity} x {price} = {summa}\n\n 💵 Umumiy narxi: {summa_all} so'm""").format(
                     order_number=order.id, date=order.created, i=i, book_name=product.name, quantity=cart.quantity,
                     price=product.price, summa=cart.quantity * product.price)
                 await message.answer(text)
