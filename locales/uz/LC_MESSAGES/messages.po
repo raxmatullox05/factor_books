@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-13 15:54+0500\n"
+"POT-Creation-Date: 2024-05-13 17:21+0500\n"
 "PO-Revision-Date: 2024-05-13 11:43+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uz\n"
@@ -17,14 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.13.1\n"
-
-#: common/cmd_list.py:5
-msgid "🚀 Botni ishga tushirish"
-msgstr ""
-
-#: common/cmd_list.py:6
-msgid "⚙ Yordam kerakmi?"
-msgstr ""
 
 #: handlers/admin_private.py:25 handlers/admin_private.py:66
 #: handlers/admin_private.py:231
@@ -51,8 +43,8 @@ msgstr ""
 
 #: handlers/admin_private.py:28 handlers/admin_private.py:70
 #: handlers/admin_private.py:198 handlers/admin_private.py:235
-#: handlers/user_private.py:29 handlers/user_private.py:67
-#: handlers/user_private.py:268 handlers/user_private.py:280
+#: handlers/user_private.py:29 handlers/user_private.py:72
+#: handlers/user_private.py:273 handlers/user_private.py:285
 msgid "🌐 Tilni tanlash"
 msgstr ""
 
@@ -166,37 +158,37 @@ msgstr ""
 msgid "Assalomu alaykum {name}! Tanlang."
 msgstr ""
 
-#: handlers/user_private.py:25 handlers/user_private.py:63
-#: handlers/user_private.py:264 handlers/user_private.py:276
+#: handlers/user_private.py:25 handlers/user_private.py:68
+#: handlers/user_private.py:269 handlers/user_private.py:281
 msgid "📚 Kitoblar"
 msgstr ""
 
-#: handlers/user_private.py:26 handlers/user_private.py:64
-#: handlers/user_private.py:265 handlers/user_private.py:277
+#: handlers/user_private.py:26 handlers/user_private.py:69
+#: handlers/user_private.py:270 handlers/user_private.py:282
 msgid "📃 Mening buyurtmalarim"
 msgstr ""
 
-#: handlers/user_private.py:27 handlers/user_private.py:65
-#: handlers/user_private.py:266 handlers/user_private.py:278
+#: handlers/user_private.py:27 handlers/user_private.py:70
+#: handlers/user_private.py:271 handlers/user_private.py:283
 msgid "🔵 Biz ijtimoiy tarmoqlarda"
 msgstr ""
 
-#: handlers/user_private.py:28 handlers/user_private.py:66
-#: handlers/user_private.py:267 handlers/user_private.py:279
+#: handlers/user_private.py:28 handlers/user_private.py:71
+#: handlers/user_private.py:272 handlers/user_private.py:284
 msgid "📞 Biz bilan bog'lanish"
 msgstr ""
 
-#: handlers/user_private.py:38 handlers/user_private.py:77
-#: handlers/user_private.py:170
+#: handlers/user_private.py:38 handlers/user_private.py:82
+#: handlers/user_private.py:175
 msgid "🔍 Qidirish"
 msgstr ""
 
-#: handlers/user_private.py:41 handlers/user_private.py:80
-#: handlers/user_private.py:173
+#: handlers/user_private.py:41 handlers/user_private.py:85
+#: handlers/user_private.py:178
 msgid "🛒 Savat({len})"
 msgstr ""
 
-#: handlers/user_private.py:42 handlers/user_private.py:174
+#: handlers/user_private.py:42 handlers/user_private.py:179
 msgid "Qaysi categoriyalarni product larini ko'rmoxchisiz: "
 msgstr ""
 
@@ -212,25 +204,33 @@ msgstr ""
 msgid "Ingliz"
 msgstr ""
 
-#: handlers/user_private.py:60
+#: handlers/user_private.py:62
+msgid "🚀 Botni ishga tushirish "
+msgstr ""
+
+#: handlers/user_private.py:63
+msgid "⚙ Yordam kerakmi?"
+msgstr ""
+
+#: handlers/user_private.py:65
 msgid "{language} tili tanlandi!"
 msgstr ""
 
-#: handlers/user_private.py:61
+#: handlers/user_private.py:66
 msgid "Tanlang."
 msgstr ""
 
-#: handlers/user_private.py:98 handlers/user_private.py:196
-#: handlers/user_private.py:232
+#: handlers/user_private.py:103 handlers/user_private.py:201
+#: handlers/user_private.py:237
 msgid "⬅ Orqaga"
 msgstr ""
 
-#: handlers/user_private.py:111
+#: handlers/user_private.py:116
 msgid "🛒 Savatga qo'shish"
 msgstr ""
 
-#: handlers/user_private.py:122 handlers/user_private.py:139
-#: handlers/user_private.py:298
+#: handlers/user_private.py:127 handlers/user_private.py:144
+#: handlers/user_private.py:303
 msgid ""
 "🔷 Nomi: {name}\n"
 "Muallifi: {author}\n"
@@ -241,37 +241,37 @@ msgid ""
 "💸 Narxi: {price} so'm"
 msgstr ""
 
-#: handlers/user_private.py:166
+#: handlers/user_private.py:171
 msgid "Product qo'shildi"
 msgstr ""
 
-#: handlers/user_private.py:183 handlers/user_private.py:218
+#: handlers/user_private.py:188 handlers/user_private.py:223
 msgid ""
 "🛒 Savat\n"
 "\n"
 msgstr ""
 
-#: handlers/user_private.py:191
+#: handlers/user_private.py:196
 msgid "Jami: {summa} so'm"
 msgstr ""
 
-#: handlers/user_private.py:194
+#: handlers/user_private.py:199
 msgid "❌ Savatni tozalash"
 msgstr ""
 
-#: handlers/user_private.py:195
+#: handlers/user_private.py:200
 msgid "✅ Buyurtmani tasdiqlash"
 msgstr ""
 
-#: handlers/user_private.py:209
+#: handlers/user_private.py:214
 msgid "📞 Telefon raqam tugmasini bosing 🔽:"
 msgstr ""
 
-#: handlers/user_private.py:210
+#: handlers/user_private.py:215
 msgid "📞 Telefon raqam"
 msgstr ""
 
-#: handlers/user_private.py:226
+#: handlers/user_private.py:231
 msgid ""
 "Jami: {summa} so'm\n"
 "Telfon raqamingiz: {phone_number}\n"
@@ -279,50 +279,50 @@ msgid ""
 "Buyurtma berasizmi?"
 msgstr ""
 
-#: handlers/user_private.py:230
+#: handlers/user_private.py:235
 msgid "❌ Yo'q"
 msgstr ""
 
-#: handlers/user_private.py:231
+#: handlers/user_private.py:236
 msgid "✅ Ha"
 msgstr ""
 
-#: handlers/user_private.py:241
+#: handlers/user_private.py:246
 msgid "✅ Hurmatli mijoz! Buyurtmangiz uchun tashakkur."
 msgstr ""
 
-#: handlers/user_private.py:244
+#: handlers/user_private.py:249
 msgid "Buyurtma raqami: {order_number}"
 msgstr ""
 
-#: handlers/user_private.py:247
+#: handlers/user_private.py:252
 msgid ""
 "🛒 Savat\n"
 "\n"
 "Buyurtma raqami: {order_id}"
 msgstr ""
 
-#: handlers/user_private.py:256
+#: handlers/user_private.py:261
 msgid "Jami: {summa} so'm\n"
 msgstr ""
 
-#: handlers/user_private.py:259
+#: handlers/user_private.py:264
 msgid "Accept"
 msgstr ""
 
-#: handlers/user_private.py:260
+#: handlers/user_private.py:265
 msgid "Cancel"
 msgstr ""
 
-#: handlers/user_private.py:262 handlers/user_private.py:275
+#: handlers/user_private.py:267 handlers/user_private.py:280
 msgid "Asosiy menu"
 msgstr ""
 
-#: handlers/user_private.py:274
+#: handlers/user_private.py:279
 msgid "❌ Bekor qilindi"
 msgstr ""
 
-#: handlers/user_private.py:288
+#: handlers/user_private.py:293
 msgid ""
 "Telegram: @RRF_0406\n"
 "\n"
@@ -331,7 +331,7 @@ msgid ""
 "Bizning guruximiz: t.me/rrf_factor_books_group"
 msgstr ""
 
-#: handlers/user_private.py:314
+#: handlers/user_private.py:319
 msgid ""
 "🔢 Buyurtma raqami: {order_number}\n"
 "📆 Buyurtma qilingan sana: {date}\n"
@@ -340,7 +340,7 @@ msgid ""
 "{quantity} x {price} = {summa}"
 msgstr ""
 
-#: handlers/user_private.py:321
+#: handlers/user_private.py:326
 msgid "🤷 Siz oldin buyurtma bermagansiz!"
 msgstr ""
 
@@ -358,5 +358,17 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Start the bot"
+#~ msgstr ""
+
+#~ msgid "🚀 Botni ishga tushirish"
+#~ msgstr ""
+
+#~ msgid "⚙ Yordam kerakmi?"
+#~ msgstr ""
+
+#~ msgid "🚀 Start the bot"
+#~ msgstr ""
+
+#~ msgid "⚙ Do you need a help?"
 #~ msgstr ""
 

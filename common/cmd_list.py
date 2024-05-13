@@ -1,10 +1,10 @@
 from aiogram.types import BotCommand
 from aiogram.utils.i18n import gettext as _
 
-user_commands = [
-    BotCommand(command='start', description=(_('🚀 Botni ishga tushirish'))),
-    BotCommand(command='help', description=(_('⚙ Yordam kerakmi?')))
-]
+user_commands = (
+    BotCommand(command='start', description='🚀 Start the bot'),
+    BotCommand(command='help', description='⚙ Do you need a help?')
+)
 
 # admin_commands = (
 #     BotCommand(command='start', description='Start the bot'),

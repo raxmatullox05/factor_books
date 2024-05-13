@@ -2,7 +2,7 @@ from aiogram import Router, F, Bot
 from aiogram.enums import ChatType
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message, CallbackQuery, InputMediaPhoto, ReplyKeyboardRemove
+from aiogram.types import Message, CallbackQuery, InputMediaPhoto, ReplyKeyboardRemove, BotCommand
 from sqlalchemy.ext.asyncio import AsyncSession
 from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
@@ -57,6 +57,11 @@ async def choose_one_language(callback: CallbackQuery, state: FSMContext, bot: B
     language_code = callback.data.split('_')[-1]
     language = (_("Uzbek", locale='uz'), _("Ingliz", locale='en'))[language_code == 'en']
     await state.update_data(locale=language_code)
+    await bot.delete_my_commands()
+    await bot.set_my_commands([
+        BotCommand(command='start', description=_('🚀 Botni ishga tushirish ', locale=language_code)),
+        BotCommand(command='help', description=_('⚙ Yordam kerakmi?', locale=language_code))
+    ])
     await callback.answer(_("{language} tili tanlandi!", locale=language_code).format(language=language))
     await callback.message.answer(text=_('Tanlang.'),
                                   reply_markup=get_reply_keyboard(
