@@ -1,4 +1,4 @@
-from sqlalchemy import String, DateTime, func, ForeignKey, Numeric
+from sqlalchemy import String, DateTime, func, ForeignKey, Numeric, BIGINT
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -11,7 +11,7 @@ class Category(Base):
     __tablename__ = 'categories'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
 
 
 class Product(Base):
@@ -35,7 +35,7 @@ class User(Base):
     __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(unique=True)
+    user_id: Mapped[int] = mapped_column(BIGINT, unique=True)
     first_name: Mapped[str] = mapped_column(String(255), nullable=True)
     last_name: Mapped[str] = mapped_column(String(255), nullable=True)
     phone: Mapped[str] = mapped_column(String(13), nullable=True)
@@ -57,4 +57,15 @@ class Order(Base):
     __tablename__ = 'orders'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(nullable=False)
+    user_id: Mapped[int] = mapped_column(BIGINT, nullable=False)
+
+
+class OrderedProduct(Base):
+    __tablename__ = 'ordered_products'
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    order_number: Mapped[int] = mapped_column(ForeignKey('orders.id'), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id'), nullable=False)
+    product_id: Mapped[int] = mapped_column(ForeignKey('products.id'), nullable=False)
+    cart_quantity: Mapped[int]
+    state: Mapped[bool]

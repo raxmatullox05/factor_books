@@ -23,16 +23,16 @@ dp.include_routers(start_router)
 async def on_startup():
     # await drop_db()
     await create_db()
-
     await bot.set_my_commands(user_commands)
 
 
 async def on_shutdown():
     await bot.delete_my_commands()
-    print('Shutting down...')
 
 
 async def main():
+    dp.startup.register(on_startup)
+    dp.shutdown.register(on_shutdown)
     i18n = I18n(path='locales')
     dp.update.outer_middleware(FSMI18nMiddleware(i18n))
     dp.startup.register(on_startup)

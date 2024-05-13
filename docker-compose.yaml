@@ -1,7 +1,23 @@
 version: "3.8"
 
 services:
-  bot_service :
+  bot_service:
     build: .
+    env_file: .env
+    restart: always
+    depends_on:
+      - postgres_service
+
+  postgres_service:
+    image: postgres:alpine
     env_file:
       - .env
+    restart: always
+    volumes:
+      - pg_data_p22:/var/lib/postgresql/data
+    ports:
+      - '5433:5432'
+
+
+volumes:
+  pg_data_p22: { }

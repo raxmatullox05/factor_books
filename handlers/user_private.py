@@ -8,7 +8,8 @@ from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
 
 from database.orm_query import orm_get_categories, orm_get_category, orm_get_products, orm_get_product, orm_add_user, \
-    orm_add_to_cart, orm_get_user_cart, orm_clear_cart, orm_set_order, orm_get_order, orm_get_orders
+    orm_add_to_cart, orm_get_user_cart, orm_clear_cart, orm_set_order, orm_get_order, orm_get_orders, \
+    orm_add_ordered_products, orm_get_ordered_products
 from filters.chat_types import ChatTypeFilter
 from keyboards.inline_keyboards import get_inline_keyboard
 from keyboards.reply_keyboards import get_reply_keyboard
@@ -233,7 +234,7 @@ async def add_contact_to_user(message: Message, session: AsyncSession):
 
 
 @user_private_router.callback_query(F.data.startswith('finish'))
-async def finish_cart(callback: CallbackQuery, session: AsyncSession):
+async def finish_cart(callback: CallbackQuery, session: AsyncSession, bot: Bot):
     if callback.data.split('_')[1] == 'tayyor':
         await callback.answer()
         await callback.message.delete()
@@ -241,13 +242,32 @@ async def finish_cart(callback: CallbackQuery, session: AsyncSession):
         await orm_set_order(session, callback.from_user.id)
         result = await orm_get_order(session, callback.from_user.id)
         await callback.message.answer(_('Buyurtma raqami: {order_number}').format(order_number=result.id))
-        await callback.message.answer(_('Asosiy menu'), reply_markup=get_reply_keyboard(
-            _("📚 Kitoblar"),
-            _("📃 Mening buyurtmalarim"),
-            _("🔵 Biz ijtimoiy tarmoqlarda"),
-            _("📞 Biz bilan bog'lanish"),
-            sizes=(1, 1, 2)
-        ))
+        carts = await orm_get_user_cart(session, callback.from_user.id)
+        if carts:
+            msg = _("🛒 Savat\n\nBuyurtma raqami: {order_id}").format(order_id=result.id)
+            summa = 0
+            for i, cart in enumerate(carts, start=1):
+                product = await orm_get_product(session, cart.product_id)
+                msg += ("{i}. {name}\n{quantity} x {price} = {summa} so'm\n\n").format(
+                    i=i, name=product.name, quantity=cart.quantity, price=product.price,
+                    summa=cart.quantity * product.price
+                )
+                summa += cart.quantity * product.price
+            msg += (_("Jami: {summa} so'm\n").
+                    format(summa=summa))
+            await bot.send_message(-1002006001626, msg, reply_markup=get_inline_keyboard(btns={
+                _("Accept"): f"final_accept_product_{result.id}_{callback.from_user.id}",
+                _("Cancel"): f"final_reject_product_{result.id}_{callback.from_user.id}",
+            }))
+        await callback.message.answer(_('Asosiy menu'),
+                                      reply_markup=get_reply_keyboard(
+                                          _("📚 Kitoblar"),
+                                          _("📃 Mening buyurtmalarim"),
+                                          _("🔵 Biz ijtimoiy tarmoqlarda"),
+                                          _("📞 Biz bilan bog'lanish"),
+                                          _("🌐 Tilni tanlash"),
+                                          sizes=(1, 1, 2)
+                                      ))
 
 
     else:
@@ -257,6 +277,7 @@ async def finish_cart(callback: CallbackQuery, session: AsyncSession):
             _("📃 Mening buyurtmalarim"),
             _("🔵 Biz ijtimoiy tarmoqlarda"),
             _("📞 Biz bilan bog'lanish"),
+            _("🌐 Tilni tanlash"),
             sizes=(1, 1, 2)
         ))
 
@@ -285,17 +306,16 @@ async def inline_query_response(message: Message, session: AsyncSession):
 
 @user_private_router.message(F.text == __("📃 Mening buyurtmalarim"))
 async def mening_buyurtmalarim(message: Message, session: AsyncSession):
-    user_id = message.from_user.id
-    products_in_cart = await orm_get_user_cart(session, user_id)
-
-    if len(products_in_cart) != 0:
-        for i, cart in enumerate(products_in_cart):
-            product = await orm_get_product(session, cart.product_id)
-            for order in await orm_get_orders(session, user_id):
+    ordered_products = await orm_get_ordered_products(session, message.from_user.id)
+    if ordered_products:
+        for i, order in enumerate(ordered_products, start=1):
+            if order.state is True:
+                product = await orm_get_product(session, order.product_id)
                 text = _(
-                    """🔢 Buyurtma raqami: {order_number}\n📆 Buyurtma qilingan sana: {date}\n\n{i}. 📕 Kitob nomi: {book_name}\n{quantity} x {price} = {summa}\n\n 💵 Umumiy narxi: {summa_all} so'm""").format(
-                    order_number=order.id, date=order.created, i=i, book_name=product.name, quantity=cart.quantity,
-                    price=product.price, summa=cart.quantity * product.price)
+                    """🔢 Buyurtma raqami: {order_number}\n📆 Buyurtma qilingan sana: {date}\n\n{i}. 📕 Kitob nomi: {book_name}\n{quantity} x {price} = {summa}""").format(
+                    order_number=order.order_number, date=order.created, i=i, book_name=product.name,
+                    quantity=order.cart_quantity,
+                    price=product.price, summa=order.cart_quantity * product.price)
                 await message.answer(text)
     else:
         await message.answer(_("🤷 Siz oldin buyurtma bermagansiz!"))
